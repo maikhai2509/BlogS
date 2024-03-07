@@ -1,0 +1,71 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row" style="margin: 0px 165px; display: flex;">
+    <div style="display: flex; width: 100%;">
+      <div style="width: 100%;">
+        <div class="row">
+          <div *ngFor="let item of listPosts" style="display: flex; width: 100%;">
+            <div class="col-md-11">
+              <!-- list bai viet -->
+              <div style="border: 1px solid gray;border-radius: 10px; margin-top: 15px;">
+                <div style="display: flex;justify-content: space-between;padding: 20px 38px;">
+                  <div style="width: 80%;">
+                    <label for="">Tiêu đề: {{item?.blog?.Title}}</label>
+                  </div>
+                  <div>
+                    <label for="">Chuyên mục: {{item?.topicInfor?.topicName}}</label>
+                  </div>
+                </div>
+                <div style="display: flex;justify-content: flex-end; padding: 0px 38px ">
+                  <label for="">Tác giả: {{item?.author?.username}}</label>
+                </div>
+                <div style="padding: 20px 38px;">
+                  {{item?.blog?.DesCription}}
+                </div>
+                <div style="display: flex;justify-content: flex-end; margin-right: 25px;cursor: pointer;">
+                  <span [routerLink]="['/home/detail-post/',item?.blog?._id]" style="font-size: 20px;">đọc tiếp --></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <app-pagination 
+              [total]="total" 
+              [totalPage]="totalPage" 
+              [dataLength]="listPosts?.length"
+              [currentPage]="currentPage" 
+              [collapse]="false" 
+              [pageSize]="pageSize" 
+              (paginate)="getAllListBlogs($event)">
+            </app-pagination>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div>
+          <button class="btn btn-secondary" [routerLink]="['/home/list-my-posts']" style="width: 350px;"
+            *ngIf="roleName">
+            Bài viết cá nhân
+          </button>
+        </div>
+        <!-- <div style="margin-top: 10px;">
+        <button class="btn btn-secondary" style="width: 350px;" 
+          (click)="openModalCreate()">
+          Tao bai viet
+        </button>
+      </div> -->
+        <!-- list chuyen muc -->
+        <div style="display: flex;flex-direction: column;align-items: center;">
+          <ul class="list-group" style="width: 100%; margin-top: 10px;">
+            <li class="list-group-item"  
+            style="cursor: pointer;"
+            *ngFor="let item of listTopic"
+            (click)="searchTopic(item._id)">
+            {{item.topicName}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

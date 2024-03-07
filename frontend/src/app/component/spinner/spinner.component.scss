@@ -1,0 +1,15 @@
+
+#loadpagepr {
+    position: absolute !important;
+    top: -25px !important;
+    height: calc(100% + 25px);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+  
+    #loadpage {
+      position: sticky;
+      top: 50%
+    }
+}
+  

@@ -1,0 +1,49 @@
+<div class="modal-content modal-dialog-custom">
+  <div class="modal-header">
+    <h4 *ngIf="!isUpdate">Thêm mới sự kiện</h4>
+    <h4 *ngIf="isUpdate">CẬP NHẬT sự kiện</h4>
+  </div>
+
+  <div class="modal-body" style="padding: 15px;">
+    <div class="row">
+
+      <div class="col-md-6">
+        <label class="input-label">Tên tiêu đề <span>*</span></label>
+        <input type="text" class="input-typing overflow-dot" 
+          [(ngModel)]="body.Title"
+          placeholder="Nhập Tên tiêu đề">
+      </div>
+
+      <div class="col-md-6">
+        <label class="input-label">Chuyên mục <span>*</span></label>
+        <ng-select [items]="listTopic" 
+                   placeholder="Lựa chọn" 
+                   class="input-select" 
+                   bindLabel="topicName" 
+                   bindValue="_id"
+                   [(ngModel)]="body.TopicId" 
+                   [searchable]="false" 
+                   [clearable]="false">
+        </ng-select>
+      </div>
+
+      <div class="col-md-12">
+        <label class="input-label" style="margin-top: 12px;">Mô tả</label>
+        <textarea type="text" class="textarea-typing" 
+                  [(ngModel)]="body.DesCription" 
+                  placeholder="Nhập mô tả">
+        </textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="btn-action">
+      <div class="btn-action-dv gray" style="margin-right: 12px;" (click)="closeModal()">
+        Hủy bỏ
+      </div>
+      <div class="btn-action-dv orange" (click)="createPosts()">Lưu lại</div>
+    </div>
+  </div>
+</div>

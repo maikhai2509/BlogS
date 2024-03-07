@@ -1,0 +1,89 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row" style="margin: 0px 165px; display: flex;">
+    <div style="display: flex; width: 100%;" >
+      <div style="width: 100%;" >
+        <div class="row">
+          <div  *ngFor="let item of listPosts" style="display: flex; width: 100%;">
+            <div class="col-md-11">
+              <!-- list bai viet -->
+              <div style="border: 1px solid gray;border-radius: 10px; margin-top: 15px;"
+                  
+              >
+                <div style="display: flex;justify-content: space-between;padding: 20px 38px;">
+                  <div style="width: 80%;">
+                    <label for="">Tiêu đề: {{item?.blog?.Title}}</label>
+                  </div>
+                  <div>
+                    <label for="">Chuyên mục: {{item?.topicInfor?.topicName}}</label>
+                  </div>
+                </div>
+        
+                <div style="display: flex;justify-content: flex-end; padding: 0px 38px ">
+                  <label for="">Tác giả: {{item?.author?.username}}</label>
+                </div>
+                <div style="padding: 20px 38px;">
+                  {{item?.blog?.DesCription}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div style="margin-top: 35px;" >
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                (click)="viewDetailPost(item)"
+                viewBox="0 0 448 512" style="width: 25px; cursor: pointer;">
+                  <path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+                </svg>
+              </div>
+              <div style="margin-top: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                (click)="modalDeletePosts(item)"
+                viewBox="0 0 448 512" style="width: 25px; cursor: pointer;">
+                  <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                </svg>
+              </div>
+            </div>
+    
+          </div>
+          <div class="row">
+            <app-pagination [total]="total" 
+                            [totalPage]="totalPage" 
+                            [dataLength]="listPosts?.length"
+                            [currentPage]="currentPage" 
+                            [collapse]="false" 
+                            [pageSize]="pageSize"
+                            (paginate)="getAllListBlogs($event)">
+            </app-pagination>
+          </div>
+        </div>     
+      </div>
+      <div >
+        <!-- <div>
+          <button class="btn btn-secondary" style="width: 350px;">Bai viet ca nhan</button>
+        </div> -->
+        <div style="margin-top: 10px;">
+          <button class="btn btn-secondary" style="width: 350px;"*ngIf="roleName === 'user'" (click)="openModalTopic()">Tạo bài viết</button>
+        </div>
+        <div style="margin-top: 10px;">
+          <button class="btn btn-secondary" style="width: 350px;" *ngIf="roleName === 'admin'" (click)="openModalCreate()">Quản lý chuyên mục</button>
+        </div>
+        <div style="margin-top: 10px;">
+          <button class="btn btn-secondary" style="width: 350px;" *ngIf="roleName === 'admin'" (click)="openModalListUser()">Danh sách user</button>
+        </div>
+        <!-- list chuyen muc -->
+        <div style="display: flex;flex-direction: column;align-items: center;">
+          <ul class="list-group" style="width: 100%; margin-top: 10px;">
+            <li class="list-group-item"  
+            style="cursor: pointer;"
+            *ngFor="let item of listTopic"
+            (click)="searchPosts(item._id)">
+            {{item.topicName}}
+            </li>
+          </ul>
+        </div>
+  
+      </div>
+
+    </div>
+  </div>
+
+</div>

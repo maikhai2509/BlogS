@@ -1,0 +1,53 @@
+<div class="container-fluid" >
+  <div class="row" style="justify-content: center; ">
+    <div style="background: rgb(139, 233, 233); margin-top: 20px; width: 1500px;" >
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" *ngIf="roleName === 'admin'" href="/home/list-my-posts">Blog</a>
+            <a class="navbar-brand" *ngIf="roleName === 'user'" href="/home/list-posts">Blog</a>
+            <a class="navbar-brand" *ngIf="roleName === null " href="/home/list-posts">Blog</a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+
+            <input class="form-control me-2" 
+                type="search" placeholder="Search" 
+                [(ngModel)]="title"
+                aria-label="Search">
+            <button class="btn btn-outline-success"
+              type="submit" style="margin-left: 20px;"
+              (click)="searchService()"
+              >Search
+            </button>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 500px;">
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/register-account']">Đăng ký </a>
+              </li>
+              <li class="nav-item" *ngIf="!username">
+                <a class="nav-link" [routerLink]="['/login']">Đăng nhập </a>
+              </li>
+              <li class="nav-item" (click)="logout()" *ngIf="username">
+                <a class="nav-link" [routerLink]="['/home/list-posts']">Logout </a>
+              </li>
+              <li class="nav-item" *ngIf="username">
+                <a class="nav-link">Xin chao: {{username}} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div >
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>

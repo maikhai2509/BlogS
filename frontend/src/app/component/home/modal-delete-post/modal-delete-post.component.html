@@ -1,0 +1,21 @@
+<div class="modal-content modal-dialog-custom">
+  <div class="modal-header">
+    <h4 >Xoa bài viết</h4>
+  </div>
+
+  <div class="modal-body" style="padding: 15px;">
+      <h4 style="display: flex;justify-content: center;color: blue;">
+        Bạn có thực sự muốn xóa tieu de ?
+      </h4>
+      <span> {{blogs.Title}}</span>
+  </div>
+
+  <div class="modal-footer">
+    <div class="btn-action">
+      <div class="btn-action-dv gray" style="margin-right: 12px;" (click)="closeModal()">
+        Hủy bỏ
+      </div>
+      <div class="btn-action-dv orange" (click)="deletePost()">Xoa</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div style="margin: 0px 165px;">
+    <div style="display: flex;justify-content: space-around;">
+      <h4>{{viewDetail?.Title}}</h4>
+    </div>
+
+    <div style="display: flex;justify-content: space-between; margin-top: 20px;">
+      <span>Tác giả:  {{viewDetail?.AuthorId?.username}}</span>
+      <span>Chuyên mục: {{viewDetail?.TopicId?.topicName}}</span>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <span>
+        {{viewDetail?.DesCription}}
+       </span>
+    </div>
+
+    <div style="display: flex;justify-content: flex-end;margin-top: 40px;">
+      <button class="btn btn-secondary" [routerLink]="['/home/list-posts']" style="width: 200px;">Quay lại</button>
+    </div>
+    
+  </div>
+</div>
