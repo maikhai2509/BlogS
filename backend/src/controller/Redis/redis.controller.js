@@ -219,7 +219,7 @@ async function GetBlogbyPage(req, res, next) {
                         
 
                        //set cache 
-                       await client.setPromise('BlogPage', JSON.stringify(newListv1))
+                       await client.setPromise('BlogPage', JSON.stringify(newListv1) )
 
                     }
                     let totalPage;
