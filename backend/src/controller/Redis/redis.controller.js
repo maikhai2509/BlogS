@@ -201,10 +201,14 @@ async function GetBlogbyPage(req, res, next) {
 
                 else {
                     console.log('no topic')
-                    var listTong1 = await BlogModel.find({ deleted: false }).exec();
-                    var list = await BlogModel.find({ deleted: false }).skip((pageIndex - 1) * pageSize).limit(pageSize).exec();
-                    var newListv1 = [];
-                    for (const item of list) {
+
+                    var listCache = JSON.parse(await client.getPromise('BlogPage'))
+                    var list = await listCache.find({ deleted: false }).exec();
+
+                    // var listTong1 = await listCache.find({ deleted: false }).exec();
+                    // var list = await listCache.find({ deleted: false }).skip((pageIndex - 1) * pageSize).limit(pageSize).exec();
+                     var newListv1 = [];
+                     for (const item of list) {
 
                         let author = await AccountUserModel.findOne({
                             _id: item.AuthorId
@@ -219,7 +223,7 @@ async function GetBlogbyPage(req, res, next) {
                         
 
                        //set cache 
-                       await client.setPromise('BlogPage', JSON.stringify(newListv1) )
+                       //await client.setPromise('BlogPage', JSON.stringify(newListv1) )
 
                     }
                     let totalPage;
@@ -235,7 +239,7 @@ async function GetBlogbyPage(req, res, next) {
                         totalItem: total,
                         pageSize: pageSize * 1,
                         pageIndex: pageIndex * 1,
-                        products: JSON.parse(await client.getPromise('BlogPage')),
+                        products: newListv1,
                         totalPage: totalPage
                     })
                 }
