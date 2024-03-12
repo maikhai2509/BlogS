@@ -1,7 +1,6 @@
 import express from 'express'
 import BlogController from '../controller/Blog/Blog.controller.js';
 import multer from 'multer'
-import upLoad from '../middleware/upload.middleware.js';
 import redis from '../controller/Redis/redis.controller.js'
 
 const router = express.Router();
@@ -12,10 +11,10 @@ router.get('/account', blog.FindByAccount)
 router.post('/create', blog.CreatePost)
 
 //query vao db
-//router.get('/get', blog.GetBlogbyPage)
+router.get('/get', blog.GetBlogbyPage)
 
 //cache qua redis
-router.get('/get', redis.GetBlogbyPage)
+//router.get('/get', redis.GetBlogbyPage)
 
 
 router.put('/update/:id', blog.Update)
